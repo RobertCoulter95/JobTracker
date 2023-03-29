@@ -16,7 +16,5 @@ public class UserController {
     }
 
     @PostMapping
-    public void registerNewUser(@RequestBody User user) {userService.createUser(user);}
-
-
+    public void registerNewUser(@RequestBody User user) throws Exception {userService.createUser(user);}
 }

@@ -16,8 +16,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void createUser(User user) {
-        Long userId = user.getId();
+    public void createUser(User user) throws Exception {
         Optional<User> existingUser = userRepository.findByUsername(user.getUsername());
         if (existingUser.isPresent()) {
             throw new IllegalStateException("Username taken.");
