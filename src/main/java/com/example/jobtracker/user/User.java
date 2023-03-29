@@ -9,7 +9,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Entity(name = "Users")
@@ -26,7 +28,7 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private String email;
-
+    private LocalDateTime created;
     @Enumerated(EnumType.ORDINAL)
     private Role role;
     public void setId(Long id) {

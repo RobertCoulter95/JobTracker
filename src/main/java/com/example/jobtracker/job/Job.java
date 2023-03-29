@@ -1,10 +1,16 @@
 package com.example.jobtracker.job;
 
 import com.example.jobtracker.company.Company;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
+import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Entity(name ="Jobs")
 @Table
+@Data
+@JsonDeserialize(using = JobDeserializer.class)
 public class Job {
     @Id
     @SequenceGenerator(
@@ -18,25 +24,39 @@ public class Job {
     )
     private Long id;
     private double pay;
-    private boolean isSalary;
+    private boolean salary;
+    private String position;
     private String description;
     private int numberOfApplicants;
-//    @ManyToOne
-//    @JoinColumn(name = "company",nullable = false)
-//    private Company company;
+    private LocalDateTime created;
+    private LocalDateTime listingOpened;
+    @ManyToOne()
+    private Company company;
 
-    public Job(Long id, double pay, boolean isSalary, String description) {
+    private String companyJobId;
+
+    public Job(Long id, double pay, boolean isSalary, String description,Company company) {
         this.id = id;
         this.pay = pay;
-        this.isSalary = isSalary;
+        this.salary = isSalary;
         this.description = description;
         this.numberOfApplicants = 0;
+        this.company = company;
+
     }
 
+    public Job(double pay, boolean isSalary, String description,Company company, String companyJobId,String position) {
+        this.pay = pay;
+        this.salary = isSalary;
+        this.description = description;
+        this.numberOfApplicants = 0;
+        this.company = company;
+        this.companyJobId = companyJobId;
+        this.position = position;
+    }
     public Job() {
 
     }
-
     public Long getId() {
         return id;
     }
@@ -53,13 +73,6 @@ public class Job {
         this.pay = pay;
     }
 
-    public boolean isSalary() {
-        return isSalary;
-    }
-
-    public void setSalary(boolean salary) {
-        isSalary = salary;
-    }
 
     public String getDescription() {
         return description;
