@@ -1,4 +1,4 @@
-package com.example.jobtracker.user;
+package com.example.jobtracker.enums;
 
 public enum Role {
     USER,

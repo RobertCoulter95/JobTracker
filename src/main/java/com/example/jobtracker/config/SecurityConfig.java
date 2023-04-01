@@ -1,6 +1,5 @@
 package com.example.jobtracker.config;
 
-import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +24,7 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/auth/**")//whitelist these
+                .requestMatchers("/api/**")//basically everyhting whitelisted, TODO CHANGE LATER
                 .permitAll()
                 .anyRequest()
                 .authenticated()

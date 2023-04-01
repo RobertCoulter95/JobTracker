@@ -1,5 +1,6 @@
 package com.example.jobtracker.user;
 
+import com.example.jobtracker.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 @Entity(name = "Users")
@@ -21,7 +21,6 @@ import java.util.List;
 @AllArgsConstructor
 @Table
 public class User implements UserDetails {
-
     @Id
     @GeneratedValue
     private Long id;
@@ -34,11 +33,9 @@ public class User implements UserDetails {
     public void setId(Long id) {
         this.id = id;
     }
-
     public Long getId() {
         return id;
     }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
